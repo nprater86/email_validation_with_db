@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emails</title>
+</head>
+<body>
+    <h1>Email Addresses in DB</h1>
+    <table style="border: 1px solid black">
+        <tr style="border: 1px solid black">
+            <th style="border: 1px solid black; padding: 5px">Email</th>
+            <th style="border: 1px solid black; padding: 5px">Created_At</th>
+            <th style="border: 1px solid black; padding: 5px">Updated_At</th>
+        </tr>
+        {% for email in emails %}
+        <tr>
+            <th style="border: 1px solid black; padding: 5px">{{email.email}}</th>
+            <th style="border: 1px solid black; padding: 5px">{{email.created_at}}</th>
+            <th style="border: 1px solid black; padding: 5px">{{email.updated_at}}</th>
+        {% endfor %}
+        </tr>
+    </table>
+    <a href="/">Home</a>
+</body>
+</html>
