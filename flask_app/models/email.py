@@ -29,13 +29,24 @@ class Email:
         query = 'INSERT INTO emails (email, created_at, updated_at) VALUES (%(email)s, NOW(), NOW());'
         return connectToMySQL('emails_schema').query_db(query, data)
 
+    @classmethod
+    def delete(cls, data):
+        query = 'DELETE FROM emails WHERE id=%(id)s'
+        return connectToMySQL('emails_schema').query_db(query, data)
+
     @staticmethod
     def validate(data):
         is_valid = True
+        emails = Email.get_all()
         if len(data['email']) == 0:
             flash("Please enter an email address!")
             is_valid = False
         if not EMAIL_REGEX.match(data['email']):
             flash("Please enter a valid email address!")
             is_valid = False
+        for email in emails:
+            if data['email'] == email.email:
+                flash("Email already in database!")
+                is_valid = False
+        
         return is_valid
